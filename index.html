@@ -90,7 +90,7 @@ footer{text-align:center;padding:40px 20px 60px;opacity:.7;font-size:.9rem}
 
 <section>
   <h2>Pasukan CELESTIAL</h2>
-  <p class="lead">29 anggota terbaik CELESTIAL. Ketuk namamu atau nama temanmu untuk dapat gelar dan pesan semangat!</p>
+  <p class="lead">29 anggota terbaik CELESTIAL. Ketuk namamu atau nama temanmu untuk dapat gelar dan pesan semangat. Ketuk lagi untuk pesan berikutnya!</p>
   <div class="roster" id="roster"></div>
 </section>
 
@@ -116,15 +116,47 @@ footer{text-align:center;padding:40px 20px 60px;opacity:.7;font-size:.9rem}
 
 <script>
 const N=["AHNAF ANGGIT KUSUMA","ANNASHRI AULIYA FIYANTO","AQEELA QURNIA ARFA","AULIA ZAIDA TSAQIF","AZKA FAUQIYYA PRABOWO","BARRA ATHARAYYAN","CINTA CITRA PUTRI PRASETYA","DAMAR SETYO NUGROHO","DHIA SYARAFANA ARETHA DHANI","FAILASUFA ADFERI MAIDA","FRANDA MULIA PERTIWI","GHAISHAN SHABIR ALGHAFARRO","GLORIOUS VICTORY AMADEUS LEONARD","HANUN MUTHIA KHOIRUNNISA","HUSNA ‘AISYATUL AZMI","MUHAMMAD IDZHARUL HAQ","MUHAMMAD MABRUR ANSHORI","MUHAMMAD RASYAD RABBANI","NADIKA AHZA BALAPRADHANA","NAJIH GIBRAN ABDULLAH","NIESHA SAYYIIDAH DAVANIA","NIZAM JOFIAN FAHREZA","NIZAM NADZAROS","RAFIFAH DANISY FATIHAH","SHAZA AQILLA KHANZA","SHIDQINA FIRDAUSY `ILMA SOFRIANANDA","TYARA AULIA PRASETYA","ZHAFIRA ANINDYA NAYRA PUTRI","ZHAFIRA FIRSTAZNA LABIBAH"];
-const T=["Sang Penakluk Soal","Penyihir Logika","Archer Fokus","Penjaga Cahaya","Master Strategi","Pemburu Nilai","Penjelajah Ilmu","Pemegang Perisai"];
-const M=["Percaya sama usahamu, kamu jauh lebih siap dari yang kamu kira!","Santai, baca soal baik-baik, dan bismillah dulu.","Setiap soal itu cuma monster kecil, pasti bisa kamu taklukkan!","Jujur itu keren. Hasil terbaik datang dari kerja kerasmu sendiri.","Kamu bagian dari tim hebat. Kami percaya sama kamu!","Ragu itu wajar, lanjut aja. Doa dan usahamu menyertai.","Satu soal dalam satu waktu, kamu pasti sampai di garis finish.","Kamu bersinar kayak bintang. Tunjukkan di Try Out ini!"];
+const T=["Sang Penakluk Soal","Penyihir Logika","Archer Fokus","Penjaga Cahaya","Master Strategi","Pemburu Nilai","Penjelajah Ilmu","Pemegang Perisai","Alkemis Rumus","Pembaca Rune","Penunggang Naga","Pemecah Teka-Teki","Sang Juara Agung","Peramu Kata","Penenun Bintang","Penjaga Gerbang Ilmu","Ksatria Ketenangan","Pemanah Kilat","Penyihir Angka","Navigator Peta Soal","Peri Konsentrasi","Pandai Besi Jawaban","Penjaga Menara Fokus","Cahaya Kristal","Pemburu Bintang Jatuh","Penjaga Kejujuran","Elf Penuh Akal","Penyihir Cahaya Bulan","Bintang Kerajaan Celestial"];
+const K={};
+const G=["Percaya sama usahamu, kamu jauh lebih siap dari yang kamu kira!","Santai, baca soal baik-baik, dan bismillah dulu.","Setiap soal itu cuma monster kecil, pasti bisa kamu taklukkan!","Jujur itu keren. Hasil terbaik datang dari kerja kerasmu sendiri.","Kamu bagian dari tim hebat. Kami percaya sama kamu!"];
+const M=[
+["Kamu jauh lebih siap dari yang kamu kira.","Taklukkan soal satu per satu, tidak perlu buru-buru.","Bismillah, gas!"],
+["Logikamu itu sihir terkuatmu.","Kalau ketemu soal rumit, pecah jadi bagian kecil.","Percaya diri, kamu pasti bisa!"],
+["Bidik pelan-pelan, fokus ke sasaran.","Satu soal, satu anak panah.","Tidak ada yang bisa mengalihkan fokusmu hari ini!"],
+["Cahayamu membuat orang di sekitarmu ikut tenang.","Tetap tenang walau soalnya bikin deg-degan.","Kamu pasti bersinar di Try Out ini!"],
+["Atur strategimu: yang mudah dulu, yang sulit belakangan.","Waktu adalah sekutumu, jadi pakai dengan cerdas.","Kamu punya rencana, kamu pasti bisa!"],
+["Setiap soal yang benar adalah poin berharga untukmu.","Teliti itu kekuatan, jadi jangan buru-buru.","Kejar nilai terbaikmu dengan tenang!"],
+["Rasa ingin tahumu adalah bekal terbesar.","Setiap soal adalah petualangan kecil.","Nikmati perjalanannya, hasilnya menyusul!"],
+["Perisaimu adalah ketenanganmu.","Kalau mulai panik, tarik napas dalam-dalam.","Kamu kuat, kamu siap!"],
+["Rumus-rumus itu ramuanmu, tinggal diramu dengan tepat.","Teliti di setiap langkah hitungan.","Hasil terbaik lahir dari proses yang sabar!"],
+["Kamu bisa membaca pola di balik setiap soal.","Baca soalnya sampai paham, baru jawab.","Kamu lebih pintar dari rasa gugupmu!"],
+["Terbanglah tinggi, jangan takut sama soal sulit.","Naga di dalam dirimu itu pemberani.","Tunjukkan kekuatanmu di Try Out ini!"],
+["Soal sulit hanyalah teka-teki yang belum terpecahkan.","Cari polanya, jangan menyerah dulu.","Otakmu cukup tajam untuk menang!"],
+["Kamu punya semangat juara di dalam dirimu.","Setiap usaha kecilmu tidak ada yang sia-sia.","Maju terus, Sang Juara!"],
+["Kata-kata di soal itu temanmu, baca dengan teliti.","Pahami dulu maksudnya, baru tulis jawabannya.","Kamu pasti bisa menaklukkannya!"],
+["Kamu bersinar dengan caramu sendiri.","Tidak perlu membandingkan diri dengan siapa pun.","Bintangmu sedang naik, ayo bersinar!"],
+["Ilmu yang kamu pelajari tidak akan mengkhianatimu.","Jaga gerbang konsentrasimu dari gangguan.","Masuklah dengan percaya diri!"],
+["Ketenanganmu adalah kekuatan hebat.","Kalau ragu, baca ulang soalnya pelan-pelan.","Hari ini kamu ksatria yang tenang dan siap!"],
+["Pikiranmu secepat anak panah, tapi tetap teliti ya.","Pilih jawaban dengan yakin.","Sasaranmu sudah di depan mata!"],
+["Angka-angka itu bahasa sihirmu.","Hitung pelan-pelan, periksa sekali lagi.","Kamu punya bakat untuk menaklukkannya!"],
+["Kamu tahu arah, tinggal ikuti petamu.","Soal yang sulit bisa dilewati dulu.","Kamu pasti sampai di tujuan!"],
+["Fokusmu lembut tapi kuat.","Satu soal pada satu waktu, tanpa terburu-buru.","Percayalah, kamu mampu!"],
+["Setiap jawabanmu ditempa dengan usaha keras.","Jangan takut salah, kita belajar dari proses.","Tempa jawaban terbaikmu hari ini!"],
+["Menara fokusmu berdiri kokoh.","Abaikan suara di sekitar, dengarkan pikiranmu.","Kamu siap menghadapi soal apa pun!"],
+["Kamu berkilau seperti kristal yang sudah diasah.","Semua belajarmu selama ini pasti ada artinya.","Tunjukkan kilaumu hari ini!"],
+["Bintang jatuh pun bisa dikejar dengan usaha.","Doa dan ikhtiarmu menyertai setiap langkah.","Ayo raih impianmu!"],
+["Kejujuran adalah kekuatan terbesarmu.","Hasil jujur itu lebih berharga dari apa pun.","Bangga pada usahamu sendiri, ya!"],
+["Kecerdikanmu adalah kelebihanmu.","Kalau buntu, cari cara lain untuk menyelesaikannya.","Kamu pasti menemukan jalannya!"],
+["Cahayamu lembut tapi menenangkan teman-temanmu.","Tarik napas dalam-dalam sebelum mulai.","Kamu siap bersinar di Try Out ini!"],
+["Kamu adalah bintang yang punya cahaya sendiri.","Setiap usaha yang kamu lakukan pasti ada hasilnya.","Percayalah pada dirimu, kamu pasti bisa melewati Try Out ini!"]
+];
 const R=document.getElementById('roster'),t=document.getElementById('toast');
 let tm;
 N.forEach((n,i)=>{const b=document.createElement('button');b.className='kn';b.innerHTML='<b>'+(i+1)+'</b><span></span>';b.lastChild.textContent=n;
-b.onclick=()=>{document.querySelectorAll('.kn.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');show(n.split(' ').slice(0,['MUHAMMAD','NIZAM','ZHAFIRA'].includes(n.split(' ')[0])?2:1).join(' ')+', '+T[i%T.length],M[Math.floor(Math.random()*M.length)]);burst(b.getBoundingClientRect())};R.appendChild(b)});
-function show(a,m){t.querySelector('small').textContent=a;t.querySelector('span').textContent=m;t.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('show'),4200)}
+b.onclick=()=>{document.querySelectorAll('.kn.on').forEach(x=>x.classList.remove('on'));b.classList.add('on');show(n.split(' ').slice(0,['MUHAMMAD','NIZAM','ZHAFIRA'].includes(n.split(' ')[0])?2:1).join(' ')+', '+T[i],M[i][K[i]=K[i]===undefined?0:(K[i]+1)%3]);burst(b.getBoundingClientRect())};R.appendChild(b)});
+function show(a,m){t.querySelector('small').textContent=a;t.querySelector('span').textContent=m;t.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('show'),4500)}
 function burst(r){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='sp';s.textContent=['✨','⭐','🌟','💫'][i%4];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';s.style.setProperty('--dx',(Math.random()*200-100)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),1500)}}
-document.getElementById('go').onclick=e=>{const r=e.target.getBoundingClientRect();burst(r);burst(r);show('Pesan Kerajaan 👑','CELESTIAL, gas bareng-bareng! '+M[Math.floor(Math.random()*M.length)])};
+document.getElementById('go').onclick=e=>{const r=e.target.getBoundingClientRect();burst(r);burst(r);show('Pesan Kerajaan 👑','CELESTIAL, gas bareng-bareng! '+G[Math.floor(Math.random()*G.length)])};
 const CK=["Tidur cukup di malam sebelumnya","Sarapan bergizi sebelum berangkat","Alat tulis dan perlengkapan lengkap","Minta doa dan restu orang tua","Datang lebih awal dengan hati tenang","Niatkan jujur dan percaya diri"];
 const cl=document.getElementById('chk'),pg=document.getElementById('pg');let dn=0;
 CK.forEach(s=>{const b=document.createElement('button');b.className='ci';b.innerHTML='<i></i><span></span>';b.lastChild.textContent=s;b.onclick=()=>{const o=b.classList.toggle('on');b.firstChild.textContent=o?'✓':'';dn+=o?1:-1;pg.style.width=(dn/CK.length*100)+'%';if(dn===CK.length){show('Perbekalan Lengkap! 🎒','Kamu siap bertempur, Ksatria CELESTIAL!');burst(b.getBoundingClientRect())}};cl.appendChild(b)});
